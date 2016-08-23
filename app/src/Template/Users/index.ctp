@@ -1,34 +1,43 @@
-<h1>Users List</h1>
+<div class="row">
+    <div class="col-md-12">
 
-<?= $this->Html->link('Aggiungi uno User', ['action' => 'add']) ?>
+        <h1>Users List</h1>
 
-<br/>
+        <br/>
 
-<table>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Cancella</th>
+            </tr>
+            </thead>
+            <tbody>
 
-    <tr>
-        <td>ID</td>
-        <td>Username</td>
-        <td>Password</td>
-    </tr>
+            <?php foreach ($users as $user): ?>
 
-<?php foreach($users as $user): ?>
+            <tr>
+                <td>
+                    <?= $this->Html->link($this->Html->tag('span', '', ['class' => 'glyphicon glyphicon-pencil', 'aria-hidden' => "true"]), ['controller' => 'Users', 'action' => 'edit', $user->id], ['escape' => false]) ?>
+                </td>
+                <td>
+                    <?= $user->name ?>
+                </td>
+                <td>
+                    <?= $user->password ?>
+                </td>
+                <td>
+                    <?= $this->Html->link($this->Html->tag('span', '', ['class' => 'glyphicon glyphicon-trash', 'aria-hidden' => "true"]), ['controller' => 'Users', 'action' => 'delete', $user->id], ['confirm' => 'Procedere con la rimozione?', 'escape' => false]) ?>
+                </td>
+            </tr>
 
-    <tr>
-        <td>
-            <?= $this->Html->link($user['id'], ['controller' => 'Users', 'action' => 'edit', $user->id]) ?>
-        </td>
-        <td>
-            <?= $user->name ?>
-        </td>
-        <td>
-            <?= $user->password ?>
-        </td>
-        <td>
-            <?= $this->Html->link('Cancella User', ['action' => 'delete', $user->id], array('confirm' => 'Procedere con la rimozione?')) ?>
-        </td>
-    </tr>
+            </tbody>
 
-<?php endforeach; ?>
+            <?php endforeach; ?>
 
-</table>
+        </table>
+
+    </div>
+</div>
